@@ -1,91 +1,136 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="static/css/styles.css" />
-    </head>
-    <body>
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
-        <div class="container">
-            <div>
-                <h1>Predict with us</h1>
-            </div>
-            <p class="prediction1">
-                    {{ prediction_text }}
-            <p>    
-            <form method="POST" , action="{{url_for('predict')}}">
-                <div class="formFields">
-                    <div class="inputField">
-                        <label htmlFor="a">Occurrence Year</label>
-                        <input  class="input" type="number" , name="a" , placeholder="Occurrence_Year" />
-                    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="static/css/styles.css" />
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="container">
+      <div>
+        <h1>Predict with us</h1>
+      </div>
+      <p class="prediction1">{{ prediction_text }}</p>
 
-                    <div  class="inputField">
-                        <label htmlFor="b">Occurrence Month</label>
-                        <input  class="input" type="number" , name="b" , placeholder="Occurrence_Month" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="c"> Occurrence Hour</label>
-                        <input  class="input" type="number" , name="c" , placeholder="Occurrence_Hour" />
-                    </div>
-                </div>
-                <div class="formFields">
-                    <div  class="inputField">
-                        <label htmlFor="d">Bike Speed</label>
-                        <input  class="input" type="number" , name="d" , placeholder="Bike_Speed" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="e">Cost of Bike</label>
-                        <input  class="input" type="number" , name="e" , placeholder="Cost_of_Bike" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="f" step="0.01" >Longitude</label>
-                        <input  class="input" type="text" , name="f" , placeholder="Longitude" />
-                    </div>
-                </div>
-                <div class="formFields">
-                    <div  class="inputField">
-                        <label htmlFor="g" step="0.01">Latitude</label>
-                        <input  class="input" type="text" , name="g" , placeholder="Latitude" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="h">Primary Offence</label>
-                        <input  class="input" type="text" , name="h" , placeholder="Primary_Offence" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="i">Division</label>
-                        <input  class="input" type="text" , name="i" , placeholder="Division" />
-                    </div>
-                </div>
-                <div class="formFields">
-                    <div  class="inputField">
-                        <label htmlFor="j">Location Type</label>
-                        <input  class="input" type="text" , name="j" , placeholder="Location_Type" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="k">Bike Make</label>
-                        <input  class="input" type="text" , name="k" , placeholder="Bike_Make" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="l">Bike Type</label>
-                        <input  class="input" type="text" , name="l" , placeholder="Bike_Type" />
-                    </div>
-                </div>
-                <div class="formFields">
-                    <div  class="inputField">
-                        <label htmlFor="m">Bike Color</label>
-                        <input  class="input" type="text" , name="m" , placeholder="Bike_Colour" />
-                    </div>
-                    <div  class="inputField">
-                        <label htmlFor="n">Neighbourhood Name</label>
-                        <input class="input" type="text" , name="n" , placeholder="NeighbourhoodName" />
-                    </div>
-                </div>
-                <div class="buttonContainer">
-                <input class="button" type="submit" , value="Predict!" />
-                </div>
-            </form>
+      <p></p>
+      <form method="POST" , action="{{url_for('predict')}}">
+        <div class="formFields">
+          <div class="inputField">
+            <label htmlFor="a">Occurrence Year</label>
+            <input
+              class="input"
+              type="number"
+              name="a"
+              placeholder="Occurrence_Year"
+            />
+          </div>
+
+          <div class="inputField">
+            <label htmlFor="b">Occurrence Month</label>
+            <input
+              class="input"
+              type="number"
+              name="b"
+              placeholder="Occurrence_Month"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="c"> Occurrence Hour</label>
+            <input
+              class="input"
+              type="number"
+              name="c"
+              placeholder="Occurrence_Hour"
+            />
+          </div>
         </div>
-    </body>
+        <div class="formFields">
+          <div class="inputField">
+            <label htmlFor="d">Bike Speed</label>
+            <input
+              class="input"
+              type="number"
+              name="d"
+              placeholder="Bike_Speed"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="e">Cost of Bike</label>
+            <input
+              class="input"
+              type="number"
+              name="e"
+              placeholder="Cost_of_Bike"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="f" step="0.01">Longitude</label>
+            <input class="input" type="text" name="f" placeholder="Longitude" />
+          </div>
+        </div>
+        <div class="formFields">
+          <div class="inputField">
+            <label htmlFor="g" step="0.01">Latitude</label>
+            <input class="input" type="text" name="g" placeholder="Latitude" />
+          </div>
+          <div class="inputField">
+            <label htmlFor="h">Primary Offence</label>
+            <input
+              class="input"
+              type="text"
+              name="h"
+              placeholder="Primary_Offence"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="i">Division</label>
+            <input class="input" type="text" name="i" placeholder="Division" />
+          </div>
+        </div>
+        <div class="formFields">
+          <div class="inputField">
+            <label htmlFor="j">Location Type</label>
+            <input
+              class="input"
+              type="text"
+              name="j"
+              placeholder="Location_Type"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="k">Bike Make</label>
+            <input class="input" type="text" name="k" placeholder="Bike_Make" />
+          </div>
+          <div class="inputField">
+            <label htmlFor="l">Bike Type</label>
+            <input class="input" type="text" name="l" placeholder="Bike_Type" />
+          </div>
+        </div>
+        <div class="formFields">
+          <div class="inputField">
+            <label htmlFor="m">Bike Color</label>
+            <input
+              class="input"
+              type="text"
+              name="m"
+              placeholder="Bike_Colour"
+            />
+          </div>
+          <div class="inputField">
+            <label htmlFor="n">Neighbourhood Name</label>
+            <input
+              class="input"
+              type="text"
+              name="n"
+              placeholder="NeighbourhoodName"
+            />
+          </div>
+        </div>
+        <div class="buttonContainer">
+          <input class="button" type="submit" , value="Predict!" />
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

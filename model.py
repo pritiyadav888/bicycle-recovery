@@ -26,7 +26,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
-data = pd.read_csv("Bicycle_Thefts.csv")
+data = pd.read_csv("Bicycle_Thefts copy.csv")
 
 print("Data size: ", data.size, "\n")
 print("Data shape: ", data.shape, "\n")
