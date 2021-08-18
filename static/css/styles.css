@@ -1,0 +1,152 @@
+
+html {
+  height:100%;
+}
+
+body {
+  margin:0;
+  font-family: PS TT Commons Roman,Gotham SSm A,Gotham SSm B,Arial,sans-serif;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, rgb(63, 203, 238) 50%, rgb(16, 228, 243) 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+.content {
+  background-color:rgba(255,255,255,.8);
+  border-radius:.25em;
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  box-sizing:border-box;
+  left:50%;
+  padding:10vmin;
+  position: relative;
+  text-align:center;
+  top:50%;
+  transform:translate(-50%, -50%);
+}
+
+h1 {
+  text-align: center;
+  font-size:x-large;
+  font-weight: 600;
+  font-family: cursive;
+}
+
+.container{
+  margin: auto;
+  margin-top: 8.5%;
+  width: 70%;
+  border:none;
+  padding: 25px 35px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
+.formFields{
+ display: flex;
+ 
+}
+.inputField{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin:4px;
+  width: 32%;
+}
+
+label{
+  color: rgb(53, 51, 51);
+  font-size: 14px;  
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.input{
+  border: 1px solid hsla(0,0%,100%,.3);
+  background: rgb(255, 252, 252);
+  border: 1px solid rgba(0,0,0,.3);
+  align-items: center;
+  color: rgba(0,0,0,.9);
+  display: flex;
+  font-weight: 400;
+  height: 36px;
+  padding: 18px 30px;
+  position: relative;
+  border-radius:5px;
+  width: 100%;
+}
+
+.input:focus { 
+  outline: none !important;
+  border-color: #075bb4;
+}
+
+.textarea:focus { 
+  outline: none !important;
+  border-color: #1271d6;
+}
+
+.buttonContainer{
+display: flex;
+justify-content: center;
+}
+
+.button{
+  width: 12%;
+  border: none;
+  background-color: rgb(63, 203, 238);
+  padding: 12px;
+  color:black;
+  font-weight: 500;
+  font-size: medium;
+  text-align: center;
+  height: 40px;
+  border-radius: 5px;
+  margin-top:18px;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* .prediction0{
+  text-align: center;
+  font-size: large;
+  font-weight: 600;
+  color:#D8000C;
+} */
+
+.prediction1{
+  text-align: center;
+  font-size: large;
+  font-weight: 600;
+  color:#4F8A10;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+
+
+
