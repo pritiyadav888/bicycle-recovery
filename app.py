@@ -49,7 +49,7 @@ def predict():
     print("\nPrediction\n",prediction)
     if prediction[0] == 0:
         return render_template('home.html', prediction_text='Model predicts that the bike should be STOLEN!')
-    elif prediction[0] == 1:
+    else:
         return render_template('home.html', prediction_text='Model predicts that the bike should be RECOVERED!')
 
 
