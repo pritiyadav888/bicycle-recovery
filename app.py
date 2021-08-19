@@ -48,9 +48,9 @@ def predict():
     prediction = model.predict(arr)
     print("\nPrediction\n",prediction)
     if prediction[0] == 0:
-        return render_template('home.html', prediction_text='Model predicts that the bike should be STOLEN!')
+        return render_template('home.html', prediction_text='Model predicts that the bike status is STOLEN!')
     else:
-        return render_template('home.html', prediction_text='Model predicts that the bike should be RECOVERED!')
+        return render_template('home.html', prediction_text='Model predicts that the bike status is RECOVERED!')
 
 
 if __name__ == "__main__":

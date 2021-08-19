@@ -26,7 +26,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 
-data = pd.read_csv("Bicycle_Thefts copy.csv")
+data = pd.read_csv("Bicycle_Thefts.csv")
 
 print("Data size: ", data.size, "\n")
 print("Data shape: ", data.shape, "\n")
@@ -46,6 +46,13 @@ data_corr['Status_code'] = pd.Series(status_encoded.reshape(len(status_encoded))
 corr_matrix = data_corr.corr()
 print("Correlation\n", corr_matrix['Status_code'].sort_values(ascending=False))
 
+#Using Pearson Correlation
+plt.figure(figsize=(12,10))
+cor = data.corr()
+sns.heatmap(cor, annot=True, cmap=plt.cm.Reds)
+plt.show()
+
+
 print("Missing data\n", data.isnull().sum())
 # When it comes to geographical data, missing values are encoded in "NSA"
 nsa_dict = {
@@ -64,6 +71,11 @@ data = data[data.Status != 'UNKNOWN']
 data.Status.unique()
 data_features = data.drop('Status', axis=1)
 data_target = data['Status']
+#Correlation with output variable
+#Correlation with output variable
+
+
+
 
 # data transformations - date
 date = pd.to_datetime(data_features['Occurrence_Date'])
@@ -238,6 +250,28 @@ grid_search_mlp.fit(X_train_smote, y_train_smote)
 print(f"MLP Classifier Best Params: \n{grid_search_mlp.best_params_}")
 clf_mlp_best = grid_search_mlp.best_estimator_
 
+
+from sklearn.model_selection import GridSearchCV
+param_grid_svc2 = {
+        'kernel': ['linear', 'rbf', 'poly'],
+        'C': [0.01,0.1, 1, 10, 100],
+        'gamma': [0.01, 0.03, 0.1, 0.3, 1.0, 3.0],
+    }
+
+
+grid_search = GridSearchCV(
+        estimator=clf_svc,
+        param_grid=param_grid_svc2,
+        scoring='accuracy',
+        refit=True,
+        verbose=3
+    )
+
+grid_search.fit(X_train_smote, y_train_smote)
+grid_search.best_params_
+best_parameters= grid_search.best_estimator_
+print(best_parameters)
+
 # Best params and estimators
 print(f"Logistic Regression Best Params: \n{grid_search_lr.best_params_}")
 print(f"Random Forest Best Params: \n{grid_search_rf.best_params_}")
@@ -249,6 +283,47 @@ clf_rf_best = grid_search_rf.best_estimator_
 clf_svc_best = grid_search_svc.best_estimator_
 clf_dt_best = grid_search_dt.best_estimator_
 clf_mlp_best = grid_search_mlp.best_estimator_
+
+#Model scoring and evaluation
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import classification_report
+from sklearn.model_selection import KFold
+import sklearn.metrics as metrics
+
+cv = KFold(n_splits=10, shuffle = True, random_state = 76)
+
+y_pred_class_logreg = cross_val_predict(clf_lr, X_train_smote, y_train_smote, cv = cv)
+y_pred_class_svc = cross_val_predict(clf_svc, X_train_smote, y_train_smote, cv = cv)
+y_pred_class_dt = cross_val_predict(clf_dt, X_train_smote, y_train_smote, cv = cv)
+y_pred_class_mlp = cross_val_predict(clf_mlp, X_train_smote, y_train_smote, cv = cv)
+y_pred_class_rf = cross_val_predict(clf_rf, X_train_smote, y_train_smote, cv = cv)
+
+
+report_mlp_logreg = metrics.classification_report(y_train_smote, y_pred_class_logreg)
+report_mlp_svc = metrics.classification_report(y_train_smote, y_pred_class_svc)
+report_mlp_dt = metrics.classification_report(y_train_smote, y_pred_class_dt)
+report_mlp_mlp = metrics.classification_report(y_train_smote, y_pred_class_mlp)
+report_mlp_rf = metrics.classification_report(y_train_smote, y_pred_class_rf)
+print("\n Report for logistic regression:\n", report_mlp_logreg)
+print("\n Report for svc :\n", report_mlp_svc)
+print("\n Report for decision tree :\n", report_mlp_dt)
+print("\n Report for mlp regression:\n", report_mlp_mlp)
+print("\n Report for random forest regression:\n", report_mlp_rf)
+
+metrics.plot_roc_curve(clf_mlp_best, X_test, y_test)  
+plt.show()
+
+metrics.plot_roc_curve(clf_dt_best, X_test, y_test)  
+plt.show()
+
+metrics.plot_roc_curve(clf_svc_best, X_test, y_test)  
+plt.show()
+
+metrics.plot_roc_curve(clf_rf_best, X_test, y_test)  
+plt.show()
+
+metrics.plot_roc_curve(clf_lr_best, X_test, y_test)  
+plt.show()
 
 from sklearn import model_selection
 outcome = []
@@ -278,10 +353,9 @@ pickle.dump(full_pipeline, open('model.pkl','wb'))
 
 # Loading model to compare the results
 model = pickle.load(open('model.pkl','rb'))
-model.fit(data_features, data_target)
+#model.fit(data_features, data_target)
 
-predict_data_from_API = pd.DataFrame([[2016, 10, 8, 24, 1100, -79.50772138, 43.64817027, 'THEFT UNDER - BICYCLE', 'D22', 'Ttc Subway Station', 'RA', 'MT', 'MRN','Kingsway South (15)']], columns=features_to_keep)
+predict_data_from_API = pd.DataFrame([[2020, 10, 5, 14, 200, 900, -8850629.735, 5411195.656, 'THEFT UNDER - BICYCLE', 'D22', 'Ttc Subway Station', 'SPECIALIZED', 'MT', 'BLU' 'Stonegate-Queensway (16)']], columns=features_to_keep)
 model.predict(predict_data_from_API)
-print(model.predict(predict_data_from_API))
 
-# model.predict([2016, 10, 8, 24, 1100, -79.50772138, 43.64817027, 'THEFT UNDER - BICYCLE', 'D22', 'Ttc Subway Station', 'RA', 'MT', 'MRN','Kingsway South (15)'])
+# model.predict([2020, 10, 5, 14, 200, 900, -8850629.735, 5411195.656, 'THEFT UNDER - BICYCLE', 'D22', 'Ttc Subway Station', 'SPECIALIZED', 'MT', 'BLU' 'Stonegate-Queensway (16)'])
